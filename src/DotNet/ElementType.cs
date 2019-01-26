@@ -79,6 +79,8 @@
 		Sentinel	= 0x41,
 		/// <summary>Pinned type (locals only)</summary>
 		Pinned		= 0x45,
+		/// <summary>Type with modifiers (readonly, transient...)</summary>
+		ExtendedType = 0x60,
 	}
 
 	public static partial class Extensions {

@@ -1456,6 +1456,14 @@ namespace dnlib.DotNet {
 			case ElementType.Sentinel:
 				break;
 
+			case ElementType.ExtendedType:
+				var modifiers = ((ExtendedTypeSig)typeSig).Modifiers;
+				if ((modifiers & TypeModifiers.ReadOnly) != 0) sb.Append(" readonly");
+				if ((modifiers & TypeModifiers.Transient) != 0) sb.Append(" transient");
+				sb.Append(" ");
+				CreateTypeSigName(typeSig.Next, flags);
+				break;
+
 			case ElementType.End:
 			case ElementType.R:
 			case ElementType.Internal:
@@ -1799,6 +1807,7 @@ namespace dnlib.DotNet {
 			case ElementType.Pinned:
 			case ElementType.ValueArray:
 			case ElementType.Module:
+			case ElementType.ExtendedType:
 				result = GetDefinitionAssembly(typeSig.Next);
 				break;
 
@@ -1868,6 +1877,7 @@ namespace dnlib.DotNet {
 			case ElementType.Pinned:
 			case ElementType.ValueArray:
 			case ElementType.Module:
+			case ElementType.ExtendedType:
 				result = GetScopeType(typeSig.Next);
 				break;
 
@@ -1935,6 +1945,7 @@ namespace dnlib.DotNet {
 			case ElementType.Pinned:
 			case ElementType.ValueArray:
 			case ElementType.Module:
+			case ElementType.ExtendedType:
 				result = GetScope(typeSig.Next);
 				break;
 
@@ -2002,6 +2013,7 @@ namespace dnlib.DotNet {
 			case ElementType.Pinned:
 			case ElementType.ValueArray:
 			case ElementType.Module:
+			case ElementType.ExtendedType:
 				result = GetOwnerModule(typeSig.Next);
 				break;
 

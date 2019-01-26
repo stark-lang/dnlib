@@ -945,6 +945,36 @@ namespace dnlib.DotNet {
 		}
 	}
 
+	[Flags]
+	public enum TypeModifiers : byte {
+		None = 0,
+
+		ReadOnly = 1 << 0,
+
+		Transient = 1 << 1,
+	}
+
+	/// <summary>
+	/// Represents a <see cref="DotNet.ElementType.ExtendedType"/>
+	/// </summary>
+	public sealed class ExtendedTypeSig : NonLeafSig {
+
+		public TypeModifiers Modifiers { get; }
+
+		/// <inheritdoc/>
+		public override ElementType ElementType => ElementType.ExtendedType;
+
+		/// <summary>
+		/// Constructor
+		/// </summary>
+		/// <param name="nextSig">The next element type</param>
+		/// <param name="modifiers">The type modifiers</param>
+		public ExtendedTypeSig(TypeSig nextSig, TypeModifiers modifiers)
+			: base(nextSig) {
+			Modifiers = modifiers;
+		}
+	}
+
 	/// <summary>
 	/// Array base class
 	/// </summary>

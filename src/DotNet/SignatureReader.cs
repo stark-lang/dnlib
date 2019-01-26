@@ -573,6 +573,12 @@ namespace dnlib.DotNet {
 			case ElementType.Sentinel:	result = new SentinelSig(); break;
 			case ElementType.Pinned:	result = new PinnedSig(ReadType()); break;
 
+			case ElementType.ExtendedType: {
+				var modifiers = (TypeModifiers)reader.ReadByte();
+				result = new ExtendedTypeSig(ReadType(), modifiers);
+				break;
+			}
+
 			case ElementType.Var:
 				if (!reader.TryReadCompressedUInt32(out num))
 					break;
