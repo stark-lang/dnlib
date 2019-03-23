@@ -733,7 +733,7 @@ namespace dnlib.DotNet.Writer {
 				return false;
 			if (tdr is TypeSpec)
 				return false;
-			return tdr.TypeName == name && tdr.Namespace == "System";
+			return tdr.TypeName == name && tdr.Namespace == "system";
 		}
 
 		static MethodSig GetMethodSig(ICustomAttributeType ctor) => ctor?.MethodSig;

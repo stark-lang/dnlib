@@ -416,7 +416,7 @@ namespace dnlib.DotNet {
 			// It's ET.Class if it's eg. a ctor System.Type arg type
 			case (SerializationType)ElementType.Class:
 				var tdr = argType as TypeDefOrRefSig;
-				if (tdr != null && tdr.DefinitionAssembly.IsCorLib() && tdr.Namespace == "System") {
+				if (tdr != null && tdr.DefinitionAssembly.IsCorLib() && tdr.Namespace == "system") {
 					if (tdr.TypeName == "Type") {
 						result = ReadValue(SerializationType.Type, tdr, out realArgType);
 						break;
@@ -573,7 +573,7 @@ namespace dnlib.DotNet {
 			case SerializationType.R8:		result = module.CorLibTypes.Double; break;
 			case SerializationType.String:	result = module.CorLibTypes.String; break;
 			case SerializationType.SZArray: result = new SZArraySig(ReadFieldOrPropType()); break;
-			case SerializationType.Type:	result = new ClassSig(module.CorLibTypes.GetTypeRef("System", "Type")); break;
+			case SerializationType.Type:	result = new ClassSig(module.CorLibTypes.GetTypeRef("system", "Type")); break;
 			case SerializationType.TaggedObject: result = module.CorLibTypes.Object; break;
 			case SerializationType.Enum:	result = ReadType(false); break;
 			default: throw new CABlobParserException("Invalid type");

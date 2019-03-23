@@ -37,13 +37,17 @@ namespace dnlib.DotNet {
 		ExplicitLayout			= 0x00000010,
 
 		/// <summary>Use this mask to retrieve class semantics information.</summary>
-		ClassSemanticsMask		= 0x00000020,
+		ClassSemanticsMask		= 0x00000060,
 		/// <summary>Use this mask to retrieve class semantics information.</summary>
 		ClassSemanticMask		= ClassSemanticsMask,
 		/// <summary>Type is a class.</summary>
 		Class					= 0x00000000,
 		/// <summary>Type is an interface.</summary>
 		Interface				= 0x00000020,
+		/// <summary>Type is a  struct.</summary>
+		Struct                  = 0x00000040,
+		/// <summary>Type is an unmanaged struct.</summary>
+		UnmanagedStruct         = 0x00000060,
 
 		/// <summary>Class is abstract</summary>
 		Abstract				= 0x00000080,

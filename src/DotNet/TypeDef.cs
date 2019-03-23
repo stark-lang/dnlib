@@ -581,41 +581,12 @@ namespace dnlib.DotNet {
 			get {
 				// Don't include abstract since value types can be abstract without throwing at runtime
 				// Also don't check for sealed, since the CLR doesn't throw at runtime
-				if ((Attributes & TypeAttributes.ClassSemanticsMask) != TypeAttributes.Class)
-					return false;
-				var baseType = BaseType;
-				if (baseType == null)
-					return false;
-				if (!baseType.DefinitionAssembly.IsCorLib())
-					return false;
-
-				// PERF: Don't allocate a System.String by calling FullName etc.
-				UTF8String baseName, baseNamespace;
-				if (baseType is TypeRef baseTr) {
-					baseName = baseTr.Name;
-					baseNamespace = baseTr.Namespace;
-				}
-				else {
-					var baseTd = baseType as TypeDef;
-					if (baseTd == null)
-						return false;
-					baseName = baseTd.Name;
-					baseNamespace = baseTd.Namespace;
-				}
-
-				if (baseNamespace != systemString)
-					return false;
-				if (baseName != valueTypeString && baseName != enumString)
-					return false;
-
-				if (!DefinitionAssembly.IsCorLib())
-					return true;
-				return !(Name == enumString && Namespace == systemString);
+				var typeAttr = (Attributes & TypeAttributes.ClassSemanticsMask);
+				return typeAttr == TypeAttributes.Struct || typeAttr == TypeAttributes.UnmanagedStruct;
 			}
 		}
-		static readonly UTF8String systemString = new UTF8String("System");
+		static readonly UTF8String systemString = new UTF8String("system");
 		static readonly UTF8String enumString = new UTF8String("Enum");
-		static readonly UTF8String valueTypeString = new UTF8String("ValueType");
 		static readonly UTF8String multicastDelegateString = new UTF8String("MulticastDelegate");
 
 		/// <summary>
@@ -625,7 +596,7 @@ namespace dnlib.DotNet {
 			get {
 				// Don't include abstract since value types can be abstract without throwing at runtime
 				// Also don't check for sealed, since the CLR doesn't throw at runtime
-				if ((Attributes & TypeAttributes.ClassSemanticsMask) != TypeAttributes.Class)
+				if ((Attributes & TypeAttributes.ClassSemanticsMask) != TypeAttributes.Struct)
 					return false;
 				var baseType = BaseType;
 				if (baseType == null)
@@ -769,7 +740,7 @@ namespace dnlib.DotNet {
 		/// Gets/sets the <see cref="TypeAttributes.Interface"/> bit
 		/// </summary>
 		public bool IsInterface {
-			get => ((TypeAttributes)attributes & TypeAttributes.Interface) != 0;
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Interface;
 			set => ModifyAttributes(value, TypeAttributes.Interface);
 		}
 
@@ -777,8 +748,24 @@ namespace dnlib.DotNet {
 		/// Gets/sets the <see cref="TypeAttributes.Class"/> bit
 		/// </summary>
 		public bool IsClass {
-			get => ((TypeAttributes)attributes & TypeAttributes.Interface) == 0;
-			set => ModifyAttributes(!value, TypeAttributes.Interface);
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Class;
+			set => ModifyAttributes(!value, 0);
+		}
+
+		/// <summary>
+		/// Gets/sets the <see cref="TypeAttributes.Struct"/> bit
+		/// </summary>
+		public bool IsStruct {
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Struct;
+			set => ModifyAttributes(!value, TypeAttributes.Struct);
+		}
+
+		/// <summary>
+		/// Gets/sets the <see cref="TypeAttributes.UnmanagedStruct"/> bit
+		/// </summary>
+		public bool IsUnmanagedStruct {
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.UnmanagedStruct;
+			set => ModifyAttributes(!value, TypeAttributes.UnmanagedStruct);
 		}
 
 		/// <summary>

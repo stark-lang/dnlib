@@ -587,7 +587,7 @@ namespace dnlib.DotNet {
 			if (PublicKeyBase.IsNullOrEmpty2(publicKey) != PublicKeyBase.IsNullOrEmpty2(targetAsm.PublicKey))
 				return false;
 
-			foreach (var ca in targetAsm.CustomAttributes.FindAll("System.Runtime.CompilerServices.InternalsVisibleToAttribute")) {
+			foreach (var ca in targetAsm.CustomAttributes.FindAll("system.runtime.compiler.InternalsVisibleToAttribute")) {
 				if (ca.ConstructorArguments.Count != 1)
 					continue;
 				var arg = ca.ConstructorArguments.Count == 0 ? default : ca.ConstructorArguments[0];
@@ -630,7 +630,7 @@ namespace dnlib.DotNet {
 			CustomAttribute ca = null;
 			for (int i = 0; i < CustomAttributes.Count; i++) {
 				var caTmp = CustomAttributes[i];
-				if (caTmp.TypeFullName != "System.Reflection.AssemblySignatureKeyAttribute")
+				if (caTmp.TypeFullName != "system.reflection.AssemblySignatureKeyAttribute")
 					continue;
 				CustomAttributes.RemoveAt(i);
 				i--;
@@ -671,7 +671,7 @@ namespace dnlib.DotNet {
 
 		CustomAttribute CreateAssemblySignatureKeyAttribute() {
 			var manifestModule = ManifestModule;
-			var owner = manifestModule.UpdateRowId(new TypeRefUser(manifestModule, "System.Reflection", "AssemblySignatureKeyAttribute", manifestModule.CorLibTypes.AssemblyRef));
+			var owner = manifestModule.UpdateRowId(new TypeRefUser(manifestModule, "system.reflection", "AssemblySignatureKeyAttribute", manifestModule.CorLibTypes.AssemblyRef));
 			var methodSig = MethodSig.CreateInstance(manifestModule.CorLibTypes.Void, manifestModule.CorLibTypes.String, manifestModule.CorLibTypes.String);
 			var ctor = manifestModule.UpdateRowId(new MemberRefUser(manifestModule, MethodDef.InstanceConstructorName, methodSig, owner));
 			var ca = new CustomAttribute(ctor);
@@ -925,7 +925,7 @@ namespace dnlib.DotNet {
 
 			hasInitdTFA = true;
 		}
-		static readonly UTF8String nameSystemRuntimeVersioning = new UTF8String("System.Runtime.Versioning");
+		static readonly UTF8String nameSystemRuntimeVersioning = new UTF8String("system.runtime.versioning");
 		static readonly UTF8String nameTargetFrameworkAttribute = new UTF8String("TargetFrameworkAttribute");
 
 		static bool TryGetName(ICustomAttributeType caType, out UTF8String ns, out UTF8String name) {

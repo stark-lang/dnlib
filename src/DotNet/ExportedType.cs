@@ -341,7 +341,7 @@ namespace dnlib.DotNet {
 		/// Gets/sets the <see cref="TypeAttributes.Interface"/> bit
 		/// </summary>
 		public bool IsInterface {
-			get => ((TypeAttributes)attributes & TypeAttributes.Interface) != 0;
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticMask) == TypeAttributes.Interface;
 			set => ModifyAttributes(value, TypeAttributes.Interface);
 		}
 
@@ -349,10 +349,26 @@ namespace dnlib.DotNet {
 		/// Gets/sets the <see cref="TypeAttributes.Class"/> bit
 		/// </summary>
 		public bool IsClass {
-			get => ((TypeAttributes)attributes & TypeAttributes.Interface) == 0;
-			set => ModifyAttributes(!value, TypeAttributes.Interface);
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticMask) == TypeAttributes.Class;
+			set => ModifyAttributes(value, TypeAttributes.Class);
 		}
 
+		/// <summary>
+		/// Gets/sets the <see cref="TypeAttributes.Struct"/> bit
+		/// </summary>
+		public bool IsStruct {
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticMask) == TypeAttributes.Struct;
+			set => ModifyAttributes(value, TypeAttributes.Struct);
+		}
+
+		/// <summary>
+		/// Gets/sets the <see cref="TypeAttributes.UnmanagedStruct"/> bit
+		/// </summary>
+		public bool IsUnmanagedStruct {
+			get => ((TypeAttributes)attributes & TypeAttributes.ClassSemanticMask) == TypeAttributes.UnmanagedStruct;
+			set => ModifyAttributes(value, TypeAttributes.UnmanagedStruct);
+		}
+		
 		/// <summary>
 		/// Gets/sets the <see cref="TypeAttributes.Abstract"/> bit
 		/// </summary>

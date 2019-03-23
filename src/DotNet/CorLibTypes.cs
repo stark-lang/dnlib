@@ -108,27 +108,27 @@ namespace dnlib.DotNet {
 		void Initialize() {
 			bool isCorLib = module.Assembly.IsCorLib();
 			typeVoid	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Void"),		ElementType.Void);
-			typeBoolean	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Boolean"),	ElementType.Boolean);
-			typeChar	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Char"),		ElementType.Char);
-			typeSByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "SByte"),		ElementType.I1);
-			typeByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Byte"),		ElementType.U1);
+			typeBoolean	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Bool"),	ElementType.Boolean);
+			typeChar	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Rune"),		ElementType.Char);
+			typeSByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int8"),		ElementType.I1);
+			typeByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt8"),		ElementType.U1);
 			typeInt16	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int16"),		ElementType.I2);
 			typeUInt16	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt16"),	ElementType.U2);
 			typeInt32	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int32"),		ElementType.I4);
 			typeUInt32	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt32"),	ElementType.U4);
 			typeInt64	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int64"),		ElementType.I8);
 			typeUInt64	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt64"),	ElementType.U8);
-			typeSingle	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Single"),	ElementType.R4);
-			typeDouble	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Double"),	ElementType.R8);
+			typeSingle	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Float32"),	ElementType.R4);
+			typeDouble	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Float64"),	ElementType.R8);
 			typeString	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "String"),	ElementType.String);
 			typeTypedReference = new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "TypedReference"), ElementType.TypedByRef);
-			typeIntPtr	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "IntPtr"),	ElementType.I);
-			typeUIntPtr	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UIntPtr"),	ElementType.U);
+			typeIntPtr	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int"),	ElementType.I);
+			typeUIntPtr	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt"),	ElementType.U);
 			typeObject	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Object"),	ElementType.Object);
 		}
 
 		ITypeDefOrRef CreateCorLibTypeRef(bool isCorLib, string name) {
-			var tr = new TypeRefUser(module, "System", name, corLibAssemblyRef);
+			var tr = new TypeRefUser(module, "system", name, corLibAssemblyRef);
 			if (isCorLib) {
 				var td = module.Find(tr);
 				if (td != null)

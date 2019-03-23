@@ -565,8 +565,8 @@ namespace dnlib.DotNet {
 			// IMPORTANT: This must match GetHashCode(TYPE)
 			// ********************************************
 
-			return GetHashCode_TypeNamespace("System") +
-					GetHashCode_TypeName("IntPtr");
+			return GetHashCode_TypeNamespace("system") +
+					GetHashCode_TypeName("Int");
 		}
 
 		bool Equals_Names(bool caseInsensitive, UTF8String a, UTF8String b) {

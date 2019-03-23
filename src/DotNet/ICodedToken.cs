@@ -178,7 +178,8 @@ namespace dnlib.DotNet {
 				// This name could change but since CoreCLR is used a lot, it's worth supporting
 				asmName.Equals("System.Private.CoreLib", StringComparison.OrdinalIgnoreCase) ||
 				asmName.Equals("netstandard", StringComparison.OrdinalIgnoreCase) ||
-				asmName.Equals("corefx", StringComparison.OrdinalIgnoreCase));
+				asmName.Equals("corefx", StringComparison.OrdinalIgnoreCase) ||
+				asmName.Equals("system", StringComparison.OrdinalIgnoreCase)); // stark
 		}
 
 		/// <summary>
@@ -1037,20 +1038,20 @@ namespace dnlib.DotNet {
 				return false;
 
 			switch (tdr.FullName) {
-			case "System.Boolean":
-			case "System.Char":
-			case "System.SByte":
-			case "System.Byte":
-			case "System.Int16":
-			case "System.UInt16":
-			case "System.Int32":
-			case "System.UInt32":
-			case "System.Int64":
-			case "System.UInt64":
-			case "System.Single":
-			case "System.Double":
-			case "System.IntPtr":
-			case "System.UIntPtr":
+			case "system.Bool":
+			case "system.Rune":
+			case "system.Int8":
+			case "system.UInt8":
+			case "system.Int16":
+			case "system.UInt16":
+			case "system.Int32":
+			case "system.UInt32":
+			case "system.Int64":
+			case "system.UInt64":
+			case "system.Float32":
+			case "system.Float64":
+			case "system.Int":
+			case "system.UInt":
 				return true;
 			default:
 				return false;

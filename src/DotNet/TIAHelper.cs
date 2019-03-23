@@ -50,7 +50,7 @@ namespace dnlib.DotNet {
 				return null;
 
 			UTF8String scope = null, identifier = null;
-			var tia = td.CustomAttributes.Find("System.Runtime.InteropServices.TypeIdentifierAttribute");
+			var tia = td.CustomAttributes.Find("system.runtime.interopServices.TypeIdentifierAttribute");
 			if (tia != null) {
 				if (tia.ConstructorArguments.Count >= 2) {
 					if (tia.ConstructorArguments[0].Type.GetElementType() != ElementType.String)
@@ -65,8 +65,8 @@ namespace dnlib.DotNet {
 				var asm = td.Module?.Assembly;
 				if (asm == null)
 					return null;
-				bool isTypeLib = asm.CustomAttributes.IsDefined("System.Runtime.InteropServices.ImportedFromTypeLibAttribute") ||
-								asm.CustomAttributes.IsDefined("System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute");
+				bool isTypeLib = asm.CustomAttributes.IsDefined("system.runtime.interopServices.ImportedFromTypeLibAttribute") ||
+								asm.CustomAttributes.IsDefined("system.runtime.interopServices.PrimaryInteropAssemblyAttribute");
 				if (!isTypeLib)
 					return null;
 			}
@@ -74,12 +74,12 @@ namespace dnlib.DotNet {
 			if (UTF8String.IsNull(identifier)) {
 				CustomAttribute gca;
 				if (td.IsInterface && td.IsImport)
-					gca = td.CustomAttributes.Find("System.Runtime.InteropServices.GuidAttribute");
+					gca = td.CustomAttributes.Find("system.runtime.interopServices.GuidAttribute");
 				else {
 					var asm = td.Module?.Assembly;
 					if (asm == null)
 						return null;
-					gca = asm.CustomAttributes.Find("System.Runtime.InteropServices.GuidAttribute");
+					gca = asm.CustomAttributes.Find("system.runtime.interopServices.GuidAttribute");
 				}
 				if (gca == null)
 					return null;
@@ -122,7 +122,7 @@ namespace dnlib.DotNet {
 
 				bool f;
 				if (td.IsInterface)
-					f = td.IsImport || td.CustomAttributes.IsDefined("System.Runtime.InteropServices.ComEventInterfaceAttribute");
+					f = td.IsImport || td.CustomAttributes.IsDefined("system.runtime.interopServices.ComEventInterfaceAttribute");
 				else
 					f = td.IsValueType || td.IsDelegate;
 				if (!f)

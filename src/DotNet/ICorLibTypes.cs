@@ -156,28 +156,28 @@
 		/// <param name="defAsm">Definition assembly</param>
 		/// <returns>A <see cref="CorLibTypeSig"/> or <c>null</c> if it didn't match any primitive type</returns>
 		public static CorLibTypeSig GetCorLibTypeSig(this ICorLibTypes self, string @namespace, string name, IAssembly defAsm) {
-			if (@namespace != "System")
+			if (@namespace != "system")
 				return null;
 			if (defAsm == null || !defAsm.IsCorLib())
 				return null;
 			switch (name) {
 			case "Void":	return self.Void;
-			case "Boolean":	return self.Boolean;
-			case "Char":	return self.Char;
-			case "SByte":	return self.SByte;
-			case "Byte":	return self.Byte;
+			case "Bool":	return self.Boolean;
+			case "Rune":	return self.Char;
+			case "Int8":	return self.SByte;
+			case "UInt8":	return self.Byte;
 			case "Int16":	return self.Int16;
 			case "UInt16":	return self.UInt16;
 			case "Int32":	return self.Int32;
 			case "UInt32":	return self.UInt32;
 			case "Int64":	return self.Int64;
 			case "UInt64":	return self.UInt64;
-			case "Single":	return self.Single;
-			case "Double":	return self.Double;
+			case "Float32":	return self.Single;
+			case "Float64":	return self.Double;
 			case "String":	return self.String;
 			case "TypedReference": return self.TypedReference;
-			case "IntPtr":	return self.IntPtr;
-			case "UIntPtr":	return self.UIntPtr;
+			case "Int":	return self.IntPtr;
+			case "UInt":	return self.UIntPtr;
 			case "Object":	return self.Object;
 			}
 			return null;
