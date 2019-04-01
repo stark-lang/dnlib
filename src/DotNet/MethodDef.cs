@@ -728,11 +728,11 @@ namespace dnlib.DotNet {
 		}
 
 		/// <summary>
-		/// Gets/sets the <see cref="MethodAttributes.HasSecurity"/> bit
+		/// Gets/sets the <see cref="MethodAttributes.IsReadOnly"/> bit
 		/// </summary>
-		public bool HasSecurity {
-			get => ((MethodAttributes)attributes & MethodAttributes.HasSecurity) != 0;
-			set => ModifyAttributes(value, MethodAttributes.HasSecurity);
+		public bool IsReadOnly {
+			get => ((MethodAttributes)attributes & MethodAttributes.IsReadOnly) != 0;
+			set => ModifyAttributes(value, MethodAttributes.IsReadOnly);
 		}
 
 		/// <summary>

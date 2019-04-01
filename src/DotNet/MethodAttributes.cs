@@ -60,7 +60,7 @@ namespace dnlib.DotNet {
 		/// <summary>Runtime should check name encoding.</summary>
 		RTSpecialName		= 0x1000,
 		/// <summary>Method has security associate with it.</summary>
-		HasSecurity			= 0x4000,
+		IsReadOnly			= 0x4000,
 		/// <summary>Method calls another method containing security code.</summary>
 		RequireSecObject	= 0x8000,
 	}
