@@ -97,6 +97,7 @@
 		Initobj			= 0xFE15,
 		Isinst			= 0x0075,
 		Jmp				= 0x0027,
+		Ldtarg          = 0x00E1,
 		Ldarg			= 0xFE09,
 		Ldarg_0			= 0x0002,
 		Ldarg_1			= 0x0003,

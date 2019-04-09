@@ -20,6 +20,7 @@
 		public static readonly OpCode UNKNOWN2		= new OpCode("UNKNOWN2",		Code.UNKNOWN2, OperandType.InlineNone, FlowControl.Meta, OpCodeType.Nternal, StackBehaviour.Push0, StackBehaviour.Pop0);
 		public static readonly OpCode Nop			= new OpCode("nop",				Code.Nop, OperandType.InlineNone, FlowControl.Next, OpCodeType.Primitive, StackBehaviour.Push0, StackBehaviour.Pop0);
 		public static readonly OpCode Break			= new OpCode("break",			Code.Break, OperandType.InlineNone, FlowControl.Break, OpCodeType.Primitive, StackBehaviour.Push0, StackBehaviour.Pop0);
+		public static readonly OpCode Ldtarg        = new OpCode("ldtarg",          Code.Ldtarg, OperandType.InlineType, FlowControl.Next, OpCodeType.Objmodel, StackBehaviour.Push1, StackBehaviour.Pop0);
 		public static readonly OpCode Ldarg_0		= new OpCode("ldarg.0",			Code.Ldarg_0, OperandType.InlineNone, FlowControl.Next, OpCodeType.Macro, StackBehaviour.Push1, StackBehaviour.Pop0);
 		public static readonly OpCode Ldarg_1		= new OpCode("ldarg.1",			Code.Ldarg_1, OperandType.InlineNone, FlowControl.Next, OpCodeType.Macro, StackBehaviour.Push1, StackBehaviour.Pop0);
 		public static readonly OpCode Ldarg_2		= new OpCode("ldarg.2",			Code.Ldarg_2, OperandType.InlineNone, FlowControl.Next, OpCodeType.Macro, StackBehaviour.Push1, StackBehaviour.Pop0);
