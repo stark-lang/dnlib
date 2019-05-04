@@ -565,7 +565,7 @@ namespace dnlib.DotNet {
 			// IMPORTANT: This must match GetHashCode(TYPE)
 			// ********************************************
 
-			return GetHashCode_TypeNamespace("system") +
+			return GetHashCode_TypeNamespace("core") +
 					GetHashCode_TypeName("Int");
 		}
 

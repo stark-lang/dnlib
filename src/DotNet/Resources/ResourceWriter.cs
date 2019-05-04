@@ -121,8 +121,8 @@ namespace dnlib.DotNet.Resources {
 			var memStream = new MemoryStream();
 			var headerWriter = new BinaryWriter(memStream);
 			var mscorlibFullName = GetMscorlibFullname();
-			headerWriter.Write("system.Resources.ResourceReader, " + mscorlibFullName);
-			headerWriter.Write("system.Resources.RuntimeResourceSet");
+			headerWriter.Write("core.Resources.ResourceReader, " + mscorlibFullName);
+			headerWriter.Write("core.Resources.RuntimeResourceSet");
 			writer.Write((int)memStream.Position);
 			writer.Write(memStream.ToArray());
 		}

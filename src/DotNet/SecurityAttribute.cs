@@ -75,7 +75,7 @@ namespace dnlib.DotNet {
 		/// <param name="xml">XML</param>
 		/// <returns>A new <see cref="SecurityAttribute"/> instance</returns>
 		public static SecurityAttribute CreateFromXml(ModuleDef module, string xml) {
-			var attrType = module.CorLibTypes.GetTypeRef("system.security.permissions", "PermissionSetAttribute");
+			var attrType = module.CorLibTypes.GetTypeRef("core.security.permissions", "PermissionSetAttribute");
 			var utf8Xml = new UTF8String(xml);
 			var namedArg = new CANamedArgument(false, module.CorLibTypes.String, "XML", new CAArgument(module.CorLibTypes.String, utf8Xml));
 			var list = new List<CANamedArgument> { namedArg };

@@ -243,7 +243,7 @@ namespace dnlib.DotNet.Pdb.Portable {
 			recursionCounter.Decrement();
 			return res;
 		}
-		static readonly UTF8String stringSystem = new UTF8String("system");
+		static readonly UTF8String stringSystem = new UTF8String("core");
 		static readonly UTF8String stringDecimal = new UTF8String("Decimal");
 		static readonly UTF8String stringDateTime = new UTF8String("DateTime");
 

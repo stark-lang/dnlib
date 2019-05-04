@@ -156,7 +156,7 @@
 		/// <param name="defAsm">Definition assembly</param>
 		/// <returns>A <see cref="CorLibTypeSig"/> or <c>null</c> if it didn't match any primitive type</returns>
 		public static CorLibTypeSig GetCorLibTypeSig(this ICorLibTypes self, string @namespace, string name, IAssembly defAsm) {
-			if (@namespace != "system")
+			if (@namespace != "core")
 				return null;
 			if (defAsm == null || !defAsm.IsCorLib())
 				return null;

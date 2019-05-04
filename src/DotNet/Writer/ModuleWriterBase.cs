@@ -493,7 +493,7 @@ namespace dnlib.DotNet.Writer {
 			StrongNameKey = signatureKey;
 			StrongNamePublicKey = null;
 			if (module.Assembly != null)
-				module.Assembly.CustomAttributes.RemoveAll("system.reflection.AssemblySignatureKeyAttribute");
+				module.Assembly.CustomAttributes.RemoveAll("core.reflection.AssemblySignatureKeyAttribute");
 		}
 
 		/// <summary>

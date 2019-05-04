@@ -585,7 +585,7 @@ namespace dnlib.DotNet {
 				return typeAttr == TypeAttributes.Struct || typeAttr == TypeAttributes.UnmanagedStruct;
 			}
 		}
-		static readonly UTF8String systemString = new UTF8String("system");
+		static readonly UTF8String systemString = new UTF8String("core");
 		static readonly UTF8String enumString = new UTF8String("Enum");
 		static readonly UTF8String multicastDelegateString = new UTF8String("MulticastDelegate");
 

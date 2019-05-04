@@ -21,7 +21,7 @@ namespace dnlib.PE {
 				TryGetArchitecture((int)RuntimeInformation.ProcessArchitecture, out machine);
 #else
 			static Assembly RuntimeInformationAssembly => typeof(object).Assembly;
-			static Type System_Runtime_InteropServices_RuntimeInformation => RuntimeInformationAssembly.GetType("system.runtime.interopServices.RuntimeInformation", throwOnError: false);
+			static Type System_Runtime_InteropServices_RuntimeInformation => RuntimeInformationAssembly.GetType("core.runtime.interopServices.RuntimeInformation", throwOnError: false);
 
 			public static bool TryGet_RuntimeInformation_Architecture(out Machine machine) {
 				machine = 0;

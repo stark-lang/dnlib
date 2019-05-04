@@ -118,7 +118,7 @@ namespace dnlib.DotNet {
 			if (secAttrs == null || secAttrs.Count != 1)
 				return null;
 			var sa = secAttrs[0];
-			if (sa == null || sa.TypeFullName != "system.security.permissions.PermissionSetAttribute")
+			if (sa == null || sa.TypeFullName != "core.security.permissions.PermissionSetAttribute")
 				return null;
 			if (sa.NamedArguments.Count != 1)
 				return null;

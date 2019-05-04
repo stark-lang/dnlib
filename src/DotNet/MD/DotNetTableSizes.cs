@@ -21,7 +21,7 @@ namespace dnlib.DotNet.MD {
 		/// <param name="bigStrings"><c>true</c> if #Strings size >= 0x10000</param>
 		/// <param name="bigGuid"><c>true</c> if #GUID size >= 0x10000</param>
 		/// <param name="bigBlob"><c>true</c> if #Blob size >= 0x10000</param>
-		/// <param name="systemRowCounts">Count of rows in each table</param>
+		/// <param name="coreRowCounts">Count of rows in each table</param>
 		/// <param name="debugRowCounts">Count of rows in each table (debug tables)</param>
 		public void InitializeSizes(bool bigStrings, bool bigGuid, bool bigBlob, IList<uint> systemRowCounts, IList<uint> debugRowCounts) {
 			this.bigStrings = bigStrings;

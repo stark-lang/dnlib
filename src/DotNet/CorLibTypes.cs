@@ -128,7 +128,7 @@ namespace dnlib.DotNet {
 		}
 
 		ITypeDefOrRef CreateCorLibTypeRef(bool isCorLib, string name) {
-			var tr = new TypeRefUser(module, "system", name, corLibAssemblyRef);
+			var tr = new TypeRefUser(module, "core", name, corLibAssemblyRef);
 			if (isCorLib) {
 				var td = module.Find(tr);
 				if (td != null)

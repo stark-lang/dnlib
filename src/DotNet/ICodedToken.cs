@@ -179,7 +179,7 @@ namespace dnlib.DotNet {
 				asmName.Equals("System.Private.CoreLib", StringComparison.OrdinalIgnoreCase) ||
 				asmName.Equals("netstandard", StringComparison.OrdinalIgnoreCase) ||
 				asmName.Equals("corefx", StringComparison.OrdinalIgnoreCase) ||
-				asmName.Equals("system", StringComparison.OrdinalIgnoreCase)); // stark
+				asmName.Equals("core", StringComparison.OrdinalIgnoreCase)); // stark
 		}
 
 		/// <summary>
@@ -1038,20 +1038,20 @@ namespace dnlib.DotNet {
 				return false;
 
 			switch (tdr.FullName) {
-			case "system.Bool":
-			case "system.Rune":
-			case "system.Int8":
-			case "system.UInt8":
-			case "system.Int16":
-			case "system.UInt16":
-			case "system.Int32":
-			case "system.UInt32":
-			case "system.Int64":
-			case "system.UInt64":
-			case "system.Float32":
-			case "system.Float64":
-			case "system.Int":
-			case "system.UInt":
+			case "core.Bool":
+			case "core.Rune":
+			case "core.Int8":
+			case "core.UInt8":
+			case "core.Int16":
+			case "core.UInt16":
+			case "core.Int32":
+			case "core.UInt32":
+			case "core.Int64":
+			case "core.UInt64":
+			case "core.Float32":
+			case "core.Float64":
+			case "core.Int":
+			case "core.UInt":
 				return true;
 			default:
 				return false;

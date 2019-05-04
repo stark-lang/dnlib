@@ -604,7 +604,7 @@ namespace dnlib.DotNet {
 
 			// If we've loaded mscorlib itself, it won't have any AssemblyRefs to itself.
 			var asm = Assembly;
-			if (asm != null && (asm.IsCorLib() || Find("system.Object", false) != null)) {
+			if (asm != null && (asm.IsCorLib() || Find("core.Object", false) != null)) {
 				IsCoreLibraryModule = true;
 				return UpdateRowId(new AssemblyRefUser(asm));
 			}
