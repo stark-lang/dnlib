@@ -192,8 +192,9 @@ namespace dnlib.DotNet.MD {
 			});
 			tableInfos[(int)Table.ClassLayout] = new TableInfo(Table.ClassLayout, "ClassLayout", new ColumnInfo[] {
 				new ColumnInfo(0, "PackingSize", ColumnSize.UInt16),
-				new ColumnInfo(1, "ClassSize", ColumnSize.UInt32),
-				new ColumnInfo(2, "Parent", ColumnSize.TypeDef),
+				new ColumnInfo(1, "Alignment", ColumnSize.UInt16),
+				new ColumnInfo(2, "ClassSize", ColumnSize.UInt32),
+				new ColumnInfo(3, "Parent", ColumnSize.TypeDef),
 			});
 			tableInfos[(int)Table.FieldLayout] = new TableInfo(Table.FieldLayout, "FieldLayout", new ColumnInfo[] {
 				new ColumnInfo(0, "OffSet", ColumnSize.UInt32),

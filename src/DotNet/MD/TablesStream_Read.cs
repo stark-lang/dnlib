@@ -336,6 +336,7 @@ namespace dnlib.DotNet.MD {
 			reader.Position = (rid - 1) * (uint)table.TableInfo.RowSize;
 			row = new RawClassLayoutRow(
 				reader.Unsafe_ReadUInt16(),
+				reader.Unsafe_ReadUInt16(),
 				reader.Unsafe_ReadUInt32(),
 				table.Column2.Unsafe_Read24(ref reader));
 			return true;

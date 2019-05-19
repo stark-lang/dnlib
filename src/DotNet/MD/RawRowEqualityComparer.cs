@@ -191,11 +191,13 @@ namespace dnlib.DotNet.MD {
 
 		public bool Equals(RawClassLayoutRow x, RawClassLayoutRow y) =>
 			x.PackingSize == y.PackingSize &&
+			x.Alignment == y.Alignment &&
 			x.ClassSize == y.ClassSize &&
 			x.Parent == y.Parent;
 
 		public int GetHashCode(RawClassLayoutRow obj) =>
 			(int)obj.PackingSize +
+			rol(obj.Alignment, 3) +
 			rol(obj.ClassSize, 3) +
 			rol(obj.Parent, 7);
 

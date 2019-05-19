@@ -426,6 +426,7 @@ namespace dnlib.DotNet {
 			if (obj == null)
 				return;
 			Add(obj.PackingSize);
+			Add(obj.Alignment);
 			Add(obj.ClassSize);
 		}
 

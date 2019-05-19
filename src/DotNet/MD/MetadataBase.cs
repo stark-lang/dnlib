@@ -357,7 +357,7 @@ namespace dnlib.DotNet.MD {
 		public override RidList GetMethodImplRidList(uint typeDefRid) => FindAllRowsUnsorted(tablesStream.MethodImplTable, 0, typeDefRid);
 
 		public override uint GetClassLayoutRid(uint typeDefRid) {
-			var list = FindAllRowsUnsorted(tablesStream.ClassLayoutTable, 2, typeDefRid);
+			var list = FindAllRowsUnsorted(tablesStream.ClassLayoutTable, 3, typeDefRid);
 			return list.Count == 0 ? 0 : list[0];
 		}
 

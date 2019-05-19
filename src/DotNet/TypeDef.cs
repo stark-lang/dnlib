@@ -336,7 +336,7 @@ namespace dnlib.DotNet {
 			var cl = ClassLayout;
 			if (cl != null)
 				return cl;
-			Interlocked.CompareExchange(ref classLayout, new ClassLayoutUser(0, 0), null);
+			Interlocked.CompareExchange(ref classLayout, new ClassLayoutUser(0, 0, 0), null);
 			return classLayout;
 		}
 
@@ -557,6 +557,22 @@ namespace dnlib.DotNet {
 			set {
 				var cl = GetOrCreateClassLayout();
 				cl.PackingSize = value;
+			}
+		}
+
+		/// <summary>
+		/// Gets/sets the alignment size. If you write to this property but <see cref="ClassLayout"/>
+		/// is <c>null</c>, it will be created. The value <see cref="ushort.MaxValue"/> is returned
+		/// if <see cref="ClassLayout"/> is <c>null</c>.
+		/// </summary>
+		public ushort Alignment {
+			get {
+				var cl = ClassLayout;
+				return cl == null ? ushort.MaxValue : cl.Alignment;
+			}
+			set {
+				var cl = GetOrCreateClassLayout();
+				cl.Alignment = value;
 			}
 		}
 

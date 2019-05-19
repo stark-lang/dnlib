@@ -302,6 +302,7 @@ namespace dnlib.DotNet.Writer {
 			for (int i = 0; i < table.Rows; i++) {
 				var row = table[(uint)i + 1];
 				writer.WriteUInt16(row.PackingSize);
+				writer.WriteUInt16(row.Alignment);
 				writer.WriteUInt32(row.ClassSize);
 				columns2.Write24(writer, row.Parent);
 			}

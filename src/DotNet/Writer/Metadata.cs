@@ -2841,7 +2841,7 @@ namespace dnlib.DotNet.Writer {
 				return;
 			var rid = GetRid(type);
 			var classLayout = type.ClassLayout;
-			var row = new RawClassLayoutRow(classLayout.PackingSize, classLayout.ClassSize, rid);
+			var row = new RawClassLayoutRow(classLayout.PackingSize, classLayout.Alignment, classLayout.ClassSize, rid);
 			classLayoutInfos.Add(type, row);
 		}
 

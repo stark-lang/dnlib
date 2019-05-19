@@ -469,11 +469,13 @@
 	/// </summary>
 	public readonly struct RawClassLayoutRow {
 		public readonly ushort PackingSize;
+		public readonly ushort Alignment;
 		public readonly uint ClassSize;
 		public readonly uint Parent;
 
-		public RawClassLayoutRow(ushort PackingSize, uint ClassSize, uint Parent) {
+		public RawClassLayoutRow(ushort PackingSize, ushort Alignment, uint ClassSize, uint Parent) {
 			this.PackingSize = PackingSize;
+			this.Alignment = Alignment;
 			this.ClassSize = ClassSize;
 			this.Parent = Parent;
 		}
@@ -487,8 +489,9 @@
 			get {
 				switch (index) {
 				case 0: return PackingSize;
-				case 1: return ClassSize;
-				case 2: return Parent;
+				case 1: return Alignment;
+				case 2: return ClassSize;
+				case 3: return Parent;
 				default: return 0;
 				}
 			}

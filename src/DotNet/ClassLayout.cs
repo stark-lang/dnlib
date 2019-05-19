@@ -34,6 +34,16 @@ namespace dnlib.DotNet {
 		protected ushort packingSize;
 
 		/// <summary>
+		/// From column ClassLayout.PackingSize
+		/// </summary>
+		public ushort Alignment {
+			get => alignment;
+			set => alignment = value;
+		}
+		/// <summary/>
+		protected ushort alignment;
+
+		/// <summary>
 		/// From column ClassLayout.ClassSize
 		/// </summary>
 		public uint ClassSize {
@@ -58,9 +68,11 @@ namespace dnlib.DotNet {
 		/// Constructor
 		/// </summary>
 		/// <param name="packingSize">PackingSize</param>
+		/// <param name="alignment">alignment</param>
 		/// <param name="classSize">ClassSize</param>
-		public ClassLayoutUser(ushort packingSize, uint classSize) {
+		public ClassLayoutUser(ushort packingSize, ushort alignment, uint classSize) {
 			this.packingSize = packingSize;
+			this.alignment = alignment;
 			this.classSize = classSize;
 		}
 	}
@@ -94,6 +106,7 @@ namespace dnlib.DotNet {
 			Debug.Assert(b);
 			classSize = row.ClassSize;
 			packingSize = row.PackingSize;
+			alignment = row.Alignment;
 		}
 	}
 }
