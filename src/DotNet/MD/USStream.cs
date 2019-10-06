@@ -34,7 +34,7 @@ namespace dnlib.DotNet.MD {
 			if (!reader.CanRead(length))
 				return null;
 			try {
-				return reader.ReadUtf16String((int)(length / 2));
+				return reader.ReadUtf8String((int)length - 1);
 			}
 			catch (OutOfMemoryException) {
 				throw;

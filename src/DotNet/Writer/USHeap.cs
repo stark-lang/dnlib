@@ -2,7 +2,8 @@
 
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
+ using System.Diagnostics;
+ using System.IO;
 using dnlib.IO;
 using dnlib.DotNet.MD;
 
@@ -51,10 +52,12 @@ namespace dnlib.DotNet.Writer {
 				if (len == 0 || (ulong)reader.Position + len > reader.Length)
 					continue;
 
-				int stringLen = (int)len / 2;
-				var s = reader.ReadUtf16String(stringLen);
-				if ((len & 1) != 0)
-					reader.ReadByte();
+				int stringLen = (int)len - 1;
+				var s = reader.ReadUtf8String(stringLen);
+				var lastByte = reader.ReadByte();
+				if (lastByte != 0) {
+					throw new InvalidOperationException("Invalid non-zero terminated UTF8 string");
+				}
 
 				if (!cachedDict.ContainsKey(s))
 					cachedDict[s] = offset;
@@ -123,19 +126,16 @@ namespace dnlib.DotNet.Writer {
 		}
 
 		void WriteString(DataWriter writer, string s) {
-			writer.WriteCompressedUInt32((uint)s.Length * 2 + 1);
-			byte last = 0;
-			for (int i = 0; i < s.Length; i++) {
-				ushort c = (ushort)s[i];
-				writer.WriteUInt16(c);
-				if (c > 0xFF || (1 <= c && c <= 8) || (0x0E <= c && c <= 0x1F) || c == 0x27 || c == 0x2D || c == 0x7F)
-					last = 1;
-			}
-			writer.WriteByte(last);
+			writer.WriteCompressedUInt32((uint)GetUTF8ByteCount(s) + 1);
+			WriteUTF8(s, writer);
+			writer.WriteByte(0);
 		}
 
 		/// <inheritdoc/>
-		public int GetRawDataSize(string data) => DataWriter.GetCompressedUInt32Length((uint)data.Length * 2 + 1) + data.Length * 2 + 1;
+		public int GetRawDataSize(string data) {
+			var byteCount = GetUTF8ByteCount(data);
+			return DataWriter.GetCompressedUInt32Length((uint)byteCount + 1) + byteCount + 1;
+		}
 
 		/// <inheritdoc/>
 		public void SetRawData(uint offset, byte[] rawData) {
@@ -155,7 +155,100 @@ namespace dnlib.DotNet.Writer {
 				WriteString(writer, s);
 				yield return new KeyValuePair<uint, byte[]>(offset, memStream.ToArray());
 				offset += (uint)memStream.Length;
+			}	
+		}
+
+		static void WriteUTF8(string str, DataWriter writer) {
+			const char ReplacementCharacter = '\uFFFD';
+
+			for(int i = 0; i < str.Length; i++) {
+				char c = str[i];
+
+				if (c < 0x80) {
+					writer.WriteByte((byte)c);
+					continue;
+				}
+
+				if (c < 0x800) {
+					writer.WriteByte((byte)(((c >> 6) & 0x1F) | 0xC0));
+					writer.WriteByte((byte)((c & 0x3F) | 0x80));
+					continue;
+				}
+
+				if (IsSurrogateChar(c)) {
+					// surrogate pair
+					if (IsHighSurrogateChar(c) && i + 1 < str.Length && IsLowSurrogateChar(str[i + 1])) {
+						int highSurrogate = c;
+						i++;
+						int lowSurrogate = str[i];
+						int codepoint = (((highSurrogate - 0xd800) << 10) + lowSurrogate - 0xdc00) + 0x10000;
+						writer.WriteByte((byte)(((codepoint >> 18) & 0x7) | 0xF0));
+						writer.WriteByte((byte)(((codepoint >> 12) & 0x3F) | 0x80));
+						writer.WriteByte((byte)(((codepoint >> 6) & 0x3F) | 0x80));
+						writer.WriteByte((byte)((codepoint & 0x3F) | 0x80));
+						continue;
+					}
+
+					// unpaired high/low surrogate
+					c = ReplacementCharacter;
+				}
+
+				writer.WriteByte((byte)(((c >> 12) & 0xF) | 0xE0));
+				writer.WriteByte((byte)(((c >> 6) & 0x3F) | 0x80));
+				writer.WriteByte((byte)((c & 0x3F) | 0x80));
 			}
 		}
+
+		static unsafe int GetUTF8ByteCount(string str) {
+			fixed (char* ptr = str) {
+				return GetUTF8ByteCount(ptr, str.Length);
+			}
+		}
+
+		static unsafe int GetUTF8ByteCount(char* str, int charCount) {
+			char* remainder;
+			return GetUTF8ByteCount(str, charCount, int.MaxValue, out remainder);
+		}
+
+		static unsafe int GetUTF8ByteCount(char* str, int charCount, int byteLimit, out char* remainder) {
+			char* end = str + charCount;
+
+			char* ptr = str;
+			int byteCount = 0;
+			while (ptr < end) {
+				int characterSize;
+				char c = *ptr++;
+				if (c < 0x80) {
+					characterSize = 1;
+				}
+				else if (c < 0x800) {
+					characterSize = 2;
+				}
+				else if (IsHighSurrogateChar(c) && ptr < end && IsLowSurrogateChar(*ptr)) {
+					// surrogate pair:
+					characterSize = 4;
+					ptr++;
+				}
+				else {
+					characterSize = 3;
+				}
+
+				if (byteCount + characterSize > byteLimit) {
+					ptr -= (characterSize < 4) ? 1 : 2;
+					break;
+				}
+
+				byteCount += characterSize;
+			}
+
+			remainder = ptr;
+			return byteCount;
+		}
+
+		static bool IsSurrogateChar(int c) => unchecked((uint)(c - 0xD800)) <= 0xDFFF - 0xD800;
+
+		static bool IsHighSurrogateChar(int c) => unchecked((uint)(c - 0xD800)) <= 0xDBFF - 0xD800;
+
+		static bool IsLowSurrogateChar(int c) => unchecked((uint)(c - 0xDC00)) <= 0xDFFF - 0xDC00;
 	}
 }
