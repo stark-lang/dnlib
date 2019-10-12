@@ -1,6 +1,6 @@
-// dnlib: See LICENSE.txt for more info
+﻿// dnlib: See LICENSE.txt for more info
 
-﻿using System;
+ using System;
 using System.Collections.Generic;
 using System.IO;
 
@@ -222,7 +222,7 @@ namespace dnlib.DotNet.Writer {
 
 			switch (Type.GetTypeCode(o.GetType())) {
 			case TypeCode.Boolean:	return etype == ElementType.Boolean;
-			case TypeCode.Char:		return etype == ElementType.Char;
+			case TypeCode.Char:		return etype == ElementType.Rune;
 			case TypeCode.SByte:	return etype == ElementType.I1;
 			case TypeCode.Byte:		return etype == ElementType.U1;
 			case TypeCode.Int16:	return etype == ElementType.I2;
@@ -394,8 +394,8 @@ namespace dnlib.DotNet.Writer {
 					writer.WriteBoolean((bool)value.Value);
 				break;
 
-			case ElementType.Char:
-				if (!VerifyTypeAndValue(value, ElementType.Char))
+			case ElementType.Rune:
+				if (!VerifyTypeAndValue(value, ElementType.Rune))
 					writer.WriteUInt16((ushort)ToUInt64(value.Value));
 				else
 					writer.WriteUInt16((ushort)(char)value.Value);
@@ -653,7 +653,7 @@ namespace dnlib.DotNet.Writer {
 			ITypeDefOrRef tdr;
 			switch (type.ElementType) {
 			case ElementType.Boolean:	writer.WriteByte((byte)SerializationType.Boolean); break;
-			case ElementType.Char:		writer.WriteByte((byte)SerializationType.Char); break;
+			case ElementType.Rune:		writer.WriteByte((byte)SerializationType.Char); break;
 			case ElementType.I1:		writer.WriteByte((byte)SerializationType.I1); break;
 			case ElementType.U1:		writer.WriteByte((byte)SerializationType.U1); break;
 			case ElementType.I2:		writer.WriteByte((byte)SerializationType.I2); break;

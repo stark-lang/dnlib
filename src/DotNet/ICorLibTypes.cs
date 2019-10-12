@@ -1,6 +1,6 @@
 // dnlib: See LICENSE.txt for more info
 
-﻿namespace dnlib.DotNet {
+ namespace dnlib.DotNet {
 	/// <summary>
 	/// Access to .NET core library's simple types
 	/// </summary>
@@ -83,12 +83,12 @@
 		/// <summary>
 		/// Gets a <c>System.IntPtr</c>
 		/// </summary>
-		CorLibTypeSig IntPtr { get; }
+		CorLibTypeSig Int { get; }
 
 		/// <summary>
 		/// Gets a <c>System.UIntPtr</c>
 		/// </summary>
-		CorLibTypeSig UIntPtr { get; }
+		CorLibTypeSig UInt { get; }
 
 		/// <summary>
 		/// Gets a <c>System.Object</c>
@@ -176,8 +176,8 @@
 			case "Float64":	return self.Double;
 			case "String":	return self.String;
 			case "TypedReference": return self.TypedReference;
-			case "Int":	return self.IntPtr;
-			case "UInt":	return self.UIntPtr;
+			case "Int":	return self.Int;
+			case "UInt":	return self.UInt;
 			case "Object":	return self.Object;
 			}
 			return null;

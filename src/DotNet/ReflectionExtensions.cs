@@ -1,6 +1,6 @@
-// dnlib: See LICENSE.txt for more info
+﻿// dnlib: See LICENSE.txt for more info
 
-﻿using System;
+ using System;
 using System.Reflection;
 
 namespace dnlib.DotNet {
@@ -42,7 +42,7 @@ namespace dnlib.DotNet {
 
 			if (a == typeof(void))			return ElementType.Void;
 			if (a == typeof(bool))			return ElementType.Boolean;
-			if (a == typeof(char))			return ElementType.Char;
+			if (a == typeof(char))			return ElementType.Rune;
 			if (a == typeof(sbyte))			return ElementType.I1;
 			if (a == typeof(byte))			return ElementType.U1;
 			if (a == typeof(short))			return ElementType.I2;

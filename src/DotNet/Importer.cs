@@ -182,7 +182,7 @@ namespace dnlib.DotNet {
 			switch (treatAsGenericInst ? ElementType.GenericInst : type.GetElementType2()) {
 			case ElementType.Void:		return module.CorLibTypes.Void;
 			case ElementType.Boolean:	return module.CorLibTypes.Boolean;
-			case ElementType.Char:		return module.CorLibTypes.Char;
+			case ElementType.Rune:		return module.CorLibTypes.Char;
 			case ElementType.I1:		return module.CorLibTypes.SByte;
 			case ElementType.U1:		return module.CorLibTypes.Byte;
 			case ElementType.I2:		return module.CorLibTypes.Int16;
@@ -195,7 +195,7 @@ namespace dnlib.DotNet {
 			case ElementType.R8:		return module.CorLibTypes.Double;
 			case ElementType.String:	return module.CorLibTypes.String;
 			case ElementType.TypedByRef:return module.CorLibTypes.TypedReference;
-			case ElementType.U:			return module.CorLibTypes.UIntPtr;
+			case ElementType.U:			return module.CorLibTypes.UInt;
 			case ElementType.Object:	return module.CorLibTypes.Object;
 			case ElementType.Ptr:		return new PtrSig(ImportAsTypeSig(type.GetElementType(), treatAsGenericInst));
 			case ElementType.ByRef:		return new ByRefSig(ImportAsTypeSig(type.GetElementType(), treatAsGenericInst));
@@ -207,7 +207,7 @@ namespace dnlib.DotNet {
 
 			case ElementType.I:
 				FixSignature = true;	// FnPtr is mapped to System.IntPtr
-				return module.CorLibTypes.IntPtr;
+				return module.CorLibTypes.Int;
 
 			case ElementType.Array:
 				FixSignature = true;	// We don't know sizes and lower bounds
@@ -757,7 +757,7 @@ namespace dnlib.DotNet {
 			switch (type.ElementType) {
 			case ElementType.Void:		result = module.CorLibTypes.Void; break;
 			case ElementType.Boolean:	result = module.CorLibTypes.Boolean; break;
-			case ElementType.Char:		result = module.CorLibTypes.Char; break;
+			case ElementType.Rune:		result = module.CorLibTypes.Char; break;
 			case ElementType.I1:		result = module.CorLibTypes.SByte; break;
 			case ElementType.U1:		result = module.CorLibTypes.Byte; break;
 			case ElementType.I2:		result = module.CorLibTypes.Int16; break;
@@ -770,8 +770,8 @@ namespace dnlib.DotNet {
 			case ElementType.R8:		result = module.CorLibTypes.Double; break;
 			case ElementType.String:	result = module.CorLibTypes.String; break;
 			case ElementType.TypedByRef:result = module.CorLibTypes.TypedReference; break;
-			case ElementType.I:			result = module.CorLibTypes.IntPtr; break;
-			case ElementType.U:			result = module.CorLibTypes.UIntPtr; break;
+			case ElementType.I:			result = module.CorLibTypes.Int; break;
+			case ElementType.U:			result = module.CorLibTypes.UInt; break;
 			case ElementType.Object:	result = module.CorLibTypes.Object; break;
 			case ElementType.Ptr:		result = new PtrSig(Import(type.Next)); break;
 			case ElementType.ByRef:		result = new ByRefSig(Import(type.Next)); break;

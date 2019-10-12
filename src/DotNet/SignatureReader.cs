@@ -545,7 +545,7 @@ namespace dnlib.DotNet {
 			switch ((ElementType)reader.ReadByte()) {
 			case ElementType.Void:		result = corLibTypes.Void; break;
 			case ElementType.Boolean:	result = corLibTypes.Boolean; break;
-			case ElementType.Char:		result = corLibTypes.Char; break;
+			case ElementType.Rune:		result = corLibTypes.Char; break;
 			case ElementType.I1:		result = corLibTypes.SByte; break;
 			case ElementType.U1:		result = corLibTypes.Byte; break;
 			case ElementType.I2:		result = corLibTypes.Int16; break;
@@ -558,8 +558,8 @@ namespace dnlib.DotNet {
 			case ElementType.R8:		result = corLibTypes.Double; break;
 			case ElementType.String:	result = corLibTypes.String; break;
 			case ElementType.TypedByRef:result = corLibTypes.TypedReference; break;
-			case ElementType.I:			result = corLibTypes.IntPtr; break;
-			case ElementType.U:			result = corLibTypes.UIntPtr; break;
+			case ElementType.I:			result = corLibTypes.Int; break;
+			case ElementType.U:			result = corLibTypes.UInt; break;
 			case ElementType.Object:	result = corLibTypes.Object; break;
 
 			case ElementType.Ptr:		result = new PtrSig(ReadType()); break;

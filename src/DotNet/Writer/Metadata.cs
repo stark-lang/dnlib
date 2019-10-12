@@ -2669,7 +2669,7 @@ namespace dnlib.DotNet.Writer {
 				return BitConverter.GetBytes((bool)o);
 
 			case TypeCode.Char:
-				VerifyConstantType(etype, ElementType.Char);
+				VerifyConstantType(etype, ElementType.Rune);
 				return BitConverter.GetBytes((char)o);
 
 			case TypeCode.SByte:

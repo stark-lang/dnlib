@@ -28,7 +28,7 @@ namespace dnlib.DotNet.Pdb.Portable {
 				writer.WriteByte((byte)et);
 				switch (et) {
 				case ElementType.Boolean:
-				case ElementType.Char:
+				case ElementType.Rune:
 				case ElementType.I1:
 				case ElementType.U1:
 				case ElementType.I2:
@@ -84,7 +84,7 @@ namespace dnlib.DotNet.Pdb.Portable {
 						var underlyingType = td.GetEnumUnderlyingType().RemovePinnedAndModifiers();
 						switch (underlyingType.GetElementType()) {
 						case ElementType.Boolean:
-						case ElementType.Char:
+						case ElementType.Rune:
 						case ElementType.I1:
 						case ElementType.U1:
 						case ElementType.I2:
@@ -214,7 +214,7 @@ namespace dnlib.DotNet.Pdb.Portable {
 				}
 				break;
 
-			case ElementType.Char:
+			case ElementType.Rune:
 				if (value is char)
 					writer.WriteUInt16((char)value);
 				else {

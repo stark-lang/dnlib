@@ -1,6 +1,6 @@
-// dnlib: See LICENSE.txt for more info
+﻿// dnlib: See LICENSE.txt for more info
 
-﻿namespace dnlib.DotNet {
+ namespace dnlib.DotNet {
 	/// <summary>
 	/// See CorSerializationType/CorHdr.h
 	/// </summary>
@@ -10,7 +10,7 @@
 		/// <summary>System.Boolean</summary>
 		Boolean		= ElementType.Boolean,
 		/// <summary>System.Char</summary>
-		Char		= ElementType.Char,
+		Char		= ElementType.Rune,
 		/// <summary>System.SByte</summary>
 		I1			= ElementType.I1,
 		/// <summary>System.Byte</summary>

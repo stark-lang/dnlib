@@ -79,7 +79,7 @@ namespace dnlib.DotNet {
 				return ElementType.Class;
 			switch (System.Type.GetTypeCode(value.GetType())) {
 			case TypeCode.Boolean:	return ElementType.Boolean;
-			case TypeCode.Char:		return ElementType.Char;
+			case TypeCode.Char:		return ElementType.Rune;
 			case TypeCode.SByte:	return ElementType.I1;
 			case TypeCode.Byte:		return ElementType.U1;
 			case TypeCode.Int16:	return ElementType.I2;
@@ -135,7 +135,7 @@ namespace dnlib.DotNet {
 					return false;
 				return reader.ReadBoolean();
 
-			case ElementType.Char:
+			case ElementType.Rune:
 				if (reader.Length < 2)
 					return (char)0;
 				return reader.ReadChar();

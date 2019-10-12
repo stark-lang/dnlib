@@ -326,7 +326,7 @@ recursive_call:
 						if (constant.Value is short)
 							constant.Value = (short)constant.Value != 0;
 						break;
-					case ElementType.Char:
+					case ElementType.Rune:
 						if (constant.Value is ushort)
 							constant.Value = (char)(ushort)constant.Value;
 						break;

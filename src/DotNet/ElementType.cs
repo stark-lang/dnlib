@@ -12,7 +12,7 @@
 		/// <summary>System.Boolean</summary>
 		Boolean		= 0x02,
 		/// <summary>System.Char</summary>
-		Char		= 0x03,
+		Rune		= 0x03,
 		/// <summary>System.SByte</summary>
 		I1			= 0x04,
 		/// <summary>System.Byte</summary>
@@ -92,7 +92,7 @@
 		public static bool IsPrimitive(this ElementType etype) {
 			switch (etype) {
 			case ElementType.Boolean:
-			case ElementType.Char:
+			case ElementType.Rune:
 			case ElementType.I1:
 			case ElementType.U1:
 			case ElementType.I2:
@@ -126,7 +126,7 @@
 			case ElementType.U1:
 				return 1;
 
-			case ElementType.Char:
+			case ElementType.Rune:
 			case ElementType.I2:
 			case ElementType.U2:
 				return 2;
@@ -163,7 +163,7 @@
 			switch (etype) {
 			case ElementType.Void:
 			case ElementType.Boolean:
-			case ElementType.Char:
+			case ElementType.Rune:
 			case ElementType.I1:
 			case ElementType.U1:
 			case ElementType.I2:

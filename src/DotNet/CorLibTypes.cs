@@ -72,10 +72,10 @@ namespace dnlib.DotNet {
 		public CorLibTypeSig TypedReference => typeTypedReference;
 
 		/// <inheritdoc/>
-		public CorLibTypeSig IntPtr => typeIntPtr;
+		public CorLibTypeSig Int => typeIntPtr;
 
 		/// <inheritdoc/>
-		public CorLibTypeSig UIntPtr => typeUIntPtr;
+		public CorLibTypeSig UInt => typeUIntPtr;
 
 		/// <inheritdoc/>
 		public CorLibTypeSig Object => typeObject;
@@ -109,7 +109,7 @@ namespace dnlib.DotNet {
 			bool isCorLib = module.Assembly.IsCorLib();
 			typeVoid	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Void"),		ElementType.Void);
 			typeBoolean	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Bool"),	ElementType.Boolean);
-			typeChar	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Rune"),		ElementType.Char);
+			typeChar	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Rune"),		ElementType.Rune);
 			typeSByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int8"),		ElementType.I1);
 			typeByte	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "UInt8"),		ElementType.U1);
 			typeInt16	= new CorLibTypeSig(CreateCorLibTypeRef(isCorLib, "Int16"),		ElementType.I2);
